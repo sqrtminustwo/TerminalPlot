@@ -9,7 +9,7 @@
 
 using namespace ftxui;
 
-Plot::Plot(std::vector<int> &points, int max_y, int y_split, int max_points_in_graph, int update_time)
+Plot::Plot(std::vector<int> &points, int max_y, int y_split = 10, int max_points_in_graph = 10, int update_time = 1000)
     : points(points), max_y(max_y), y_split(y_split), max_points_in_graph(max_points_in_graph), step(getStep()),
       update_time(update_time) {
     main_component = Renderer([this] {
