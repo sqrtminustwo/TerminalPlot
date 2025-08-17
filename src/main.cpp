@@ -9,19 +9,18 @@ int genRandom(int lower, int upper) {
 }
 
 int main() {
-
+    std::vector<int> points;
     int max_y = 240;
     int y_split = 10;
     int max_points_in_one_graph = 20;
     int update_time = 200;
-    std::vector<int> points;
     Plot plot(points, max_y, y_split, max_points_in_one_graph, update_time);
     plot.startPlotting();
 
-    int fps;
+    int point;
     while (true) {
-        fps = genRandom(10, 230);
-        points.push_back(fps);
+        point = genRandom(10, 230);
+        points.push_back(point);
         std::this_thread::sleep_for(std::chrono::milliseconds(update_time));
     }
 }
