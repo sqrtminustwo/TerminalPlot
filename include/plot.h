@@ -18,7 +18,7 @@ class Plot {
         step = getStep();
     };
 
-    ftxui::Component getPlot() { return main_component; };
+    ftxui::Component getPlot();
 
   private:
     int normalizePoint(int point) { return ((float)(max_y - point) / (float)max_y) * 100; }
@@ -32,6 +32,7 @@ class Plot {
     int step;
     // In ms (value below 50ms will cause high cpu load)
     int update_time;
+    bool moved = false;
     std::vector<int> &points;
 };
 

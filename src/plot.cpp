@@ -46,6 +46,12 @@ Plot::Plot(std::vector<int> &points, int max_y, int y_split, int max_points_in_g
 }
 
 void Plot::startPlotting() {
+    moved = true;
     terminal_screen = std::unique_ptr<TerminalScreen>(new TerminalScreen(main_component, update_time));
     terminal_screen->start();
+}
+
+ftxui::Component Plot::getPlot() {
+    if (moved) throw std::runtime_error("Was used for plotting, can't reuse!");
+    return main_component;
 }
