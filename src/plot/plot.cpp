@@ -9,9 +9,11 @@
 
 using namespace ftxui;
 
-Plot::Plot(std::vector<int> &points, int max_y, int y_split = 10, int max_points_in_graph = 10, int update_time = 1000)
-    : points(points), max_y(max_y), y_split(y_split), max_points_in_graph(max_points_in_graph), step(getStep()),
-      update_time(update_time) {
+Plot::Plot(
+    std::vector<int> &points, int max_y, ftxui::Color color, int y_split, int max_points_in_graph, int update_time
+)
+    : points(points), max_y(max_y), color(color), y_split(y_split), max_points_in_graph(max_points_in_graph),
+      step(getStep()), update_time(update_time) {
     main_component = Renderer([this] {
         auto c = Canvas(100, 100);
 
@@ -30,15 +32,19 @@ Plot::Plot(std::vector<int> &points, int max_y, int y_split = 10, int max_points
             auto p1 = normalizePoint(points_subset.at(pos - 1));
             auto p2 = normalizePoint(points_subset.at(pos));
             // c.DrawText(1, 0, " " + std::to_string(p1) + " " + std::to_string(p2));
-            c.DrawPointLine(x - step, p1, x, p2);
+            c.DrawPointLine(x - step, p1, x, p2, this->color);
         }
 
         std::vector<Element> vec{};
 
-        for (int split = this->max_y; split >= 0; split -= this->y_split) {
-            vec.push_back(text(std::to_string(split)));
+        std::string e;
+        for (int split = this->max_y; split > 0; split = std::max(split - this->y_split, 0)) {
+            std::string e = std::to_string(split);
+            vec.push_back(text(e));
             vec.push_back(filler());
         }
+        if (vec.size() > 0) vec.pop_back(); // No filler needed after last element
+
         auto y_axis_fps = vbox(vec);
 
         return hbox(y_axis_fps, canvas(std::move(c))) | border;
