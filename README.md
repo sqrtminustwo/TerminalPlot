@@ -2,7 +2,7 @@
 
 ![til](/demo/demo2.gif)
 
-A simple C++ program to make graphs in a terminal.
+A simple C++ program to make graphs in a terminal (although I consider it more of an example of FTXUI usage than a separate project).
 
 ## Requirements
 
