@@ -22,7 +22,7 @@ Plot::Plot(
 
         int coef = 1;
         int x;
-        for (pos = pos + 1; pos < size; pos++) {
+        for (pos += 1; pos < size; pos++) {
             x = coef * step;
             coef++;
             auto p1 = normalizePoint(this->points.at(pos - 1));
