@@ -3,9 +3,9 @@
 #include <string>
 #include <vector>
 
-#include "ftxui/component/component.hpp"      // for Renderer
-#include "ftxui/component/component_base.hpp" // for ComponentBase
-#include "ftxui/dom/canvas.hpp"               // for Canvas
+#include "ftxui/component/component.hpp"
+#include "ftxui/component/component_base.hpp"
+#include "ftxui/dom/canvas.hpp"
 
 using namespace ftxui;
 
