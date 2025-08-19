@@ -20,17 +20,13 @@ Plot::Plot(
         int size = this->points.size();
         int pos = size > this->max_points_in_graph ? size - this->max_points_in_graph : 0;
 
-        std::vector<int>::const_iterator first = this->points.begin() + pos;
-        std::vector<int>::const_iterator last = this->points.begin() + size;
-        std::vector<int> points_subset(first, last);
-
         int coef = 1;
         int x;
-        for (pos = 1; pos < points_subset.size(); pos++) {
+        for (pos = pos + 1; pos < size; pos++) {
             x = coef * step;
             coef++;
-            auto p1 = normalizePoint(points_subset.at(pos - 1));
-            auto p2 = normalizePoint(points_subset.at(pos));
+            auto p1 = normalizePoint(this->points.at(pos - 1));
+            auto p2 = normalizePoint(this->points.at(pos));
             // c.DrawText(1, 0, " " + std::to_string(p1) + " " + std::to_string(p2));
             c.DrawPointLine(x - step, p1, x, p2, this->color);
         }
