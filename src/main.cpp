@@ -1,3 +1,4 @@
+#include "terminal_screen.h"
 #include <ftxui/component/component.hpp>
 #include <ftxui/dom/elements.hpp>
 #include <plot.h>

@@ -1,4 +1,5 @@
 #include <plot.h>
+#include <terminal_screen.h>
 #include <ctime>
 #include <string>
 #include <vector>
@@ -8,6 +9,10 @@
 #include "ftxui/dom/canvas.hpp"
 
 using namespace ftxui;
+
+struct Plot::TerminalScreenHolder {
+    std::unique_ptr<TerminalScreen> terminal_screen;
+};
 
 Plot::Plot(
     std::vector<int> &points, int max_y, ftxui::Color color, int y_split, int max_points_in_graph, int update_time
@@ -47,13 +52,18 @@ Plot::Plot(
     });
 }
 
+Plot::~Plot() = default;
+
 void Plot::startPlotting() {
+    checkMoved();
+    terminal_screen_holder = std::make_unique<TerminalScreenHolder>();
+    terminal_screen_holder->terminal_screen =
+        std::unique_ptr<TerminalScreen>(new TerminalScreen(main_component, update_time));
+    terminal_screen_holder->terminal_screen->start();
     moved = true;
-    terminal_screen = std::unique_ptr<TerminalScreen>(new TerminalScreen(main_component, update_time));
-    terminal_screen->start();
 }
 
 ftxui::Component Plot::getPlot() {
-    if (moved) throw std::runtime_error("Was used for plotting, can't reuse!");
+    checkMoved();
     return main_component;
 }
