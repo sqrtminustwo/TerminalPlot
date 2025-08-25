@@ -63,7 +63,7 @@ void Plot::startPlotting() {
     moved = true;
 }
 
-ftxui::Component Plot::getPlot() {
+ftxui::Component Plot::getPlot() const {
     checkMoved();
     return main_component;
 }

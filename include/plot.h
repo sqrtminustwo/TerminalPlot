@@ -24,12 +24,12 @@ class Plot {
     void setYSplit(int y_split) { this->y_split = y_split; }
     void setColor(ftxui::Color color) { this->color = color; }
 
-    ftxui::Component getPlot();
+    ftxui::Component getPlot() const;
 
   private:
-    int normalizePoint(int point) { return ((float)(max_y - point) / (float)max_y) * 100; }
-    int getStep() { return 100 / max_points_in_graph; }
-    void checkMoved() {
+    inline int normalizePoint(int point) const { return ((float)(max_y - point) / (float)max_y) * 100; }
+    int getStep() const { return 100 / max_points_in_graph; }
+    void checkMoved() const {
         if (moved) throw std::runtime_error("Was used for plotting, can't reuse!");
     }
 
